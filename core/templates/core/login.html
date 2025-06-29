@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+<div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded shadow">
+    <h1 class="mb-6 text-3xl font-bold">Login</h1>
+    <form method="post" action="{% url 'core:login' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="id_username" class="block text-sm font-medium text-gray-700">Username</label>
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            {{ form.password }}
+        </div>
+
+        {% if form.errors or form.non_field_errors %}
+        <div class="mb-3 p-6 bg-red-100 rounded-xl">
+            <ul class="list-disc list-inside text-sm text-red-600">
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <button type="submit"
+            class="mt-4 px-6 py-3 text-lg font-semibold bg-orange-400 hover:bg-orange-600 text-white rounded-xl hover:text-white-400">
+            Login</button>
+    </form>
+</div>
+{% endblock content %}

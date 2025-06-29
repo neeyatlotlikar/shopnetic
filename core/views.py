@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import redirect, render
 
 from items.models import Category, Item
+
+from .forms import SignUpForm
 
 
 def index(request):
@@ -20,3 +23,26 @@ def contact(request):
     Render the contact page.
     """
     return render(request, "core/contact.html")
+
+
+def signup(request):
+    """
+    Render the signup page.
+    """
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("core:login")
+            # return render(request, "core/login.html")
+    else:
+        form = SignUpForm()
+    return render(request, "core/signup.html", {"form": form})
+
+
+def logout_view(request):
+    """
+    Handle user logout.
+    """
+    logout(request)
+    return redirect("core:index")
