@@ -31,8 +31,8 @@
         {% if form.errors or form.non_field_errors %}
         <div class="mb-3 p-6 bg-red-100 rounded-xl">
             <ul class="list-disc list-inside text-sm text-red-600">
-                {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
+                {% for field in form %}
+                <li>{{ field.errors }}</li>
                 {% endfor %}
 
                 {{ form.non_field_errors }}
