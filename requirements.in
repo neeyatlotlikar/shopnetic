@@ -1,3 +1,5 @@
 django
 dotenv
 Pillow
+django-extensions
+ipython

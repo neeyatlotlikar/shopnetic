@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Items{% endblock title %}
+
+{% block content %}
+<div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100 p-3">
+    <div class="col-span-1">
+        <form action="{% url 'items:item_list' %}" method="get">
+            <input type="text" name="q" placeholder="Search items..."
+                class="border py-4 px-6 w-full rounded-xl bg-white" value="{{ query|default_if_none:'' }}">
+
+            <button class="mt-2 py-4 px-8 text-lg bg-lime-500 text-white rounded-xl">Search</button>
+        </form>
+
+        <hr class="my-6">
+
+        <h2 class="text-lg font-semibold">Categories</h2>
+        <ul class="mt-2">
+            {% for category in categories %}
+            <li><a href="{% url 'items:item_list' %}?q={{ query }}&category={{ category.id }}"
+                    class="block p-2 hover:bg-gray-300 {% if category.id == category_id %} bg-gray-300 {% endif %}">
+                    {{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <hr class="my-6">
+
+        <h2 class="text-lg font-semibold">Reset Filters</h2>
+        <ul class="mt-2">
+            <li><a href="{% url 'items:item_list' %}"
+                    class="mt-2 inline-block py-4 px-8 bg-indigo-500 text-white rounded-xl text-lg hover:bg-indigo-600">
+                    Reset</a></li>
+        </ul>
+    </div>
+
+    <div class="col-span-3">
+        <ul class="grid grid-cols-3 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {% for item in items %}
+            <li class="bg-white rounded-lg shadow-md p-4">
+                <a href="{% url 'items:item_detail' item.id %}" class="block mb-4">
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"
+                        class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+                    <p class="text-gray-600">{{ item.description|truncatechars:100 }}</p>
+                    <p class="text-gray-800 font-bold">{{ item.price }} USD</p>
+                </a>
+            </li>
+            {% empty %}
+            <li class="col-span-1">
+                <p class="text-gray-600">No items found.</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}
