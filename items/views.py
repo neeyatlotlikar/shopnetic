@@ -27,3 +27,12 @@ def new(request):
     else:
         form = NewItemForm()
     return render(request, "item/new.html", {"form": form, "title": "New Item"})
+
+
+@login_required
+def delete(request, item_id):
+    item = get_object_or_404(Item, pk=item_id, created_by=request.user)
+    # if request.method == "POST":
+    item.delete()
+    return redirect("dashboard:index")
+    # return render(request, "item/delete.html", {"item": item, "title": "Delete Item"})

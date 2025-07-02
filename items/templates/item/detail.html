@@ -14,10 +14,19 @@
         <br>
 
         {% if item.description %}
-            <p class="text-gray-600">{{ item.description }}</p><br>
+        <p class="text-gray-600">{{ item.description }}</p><br>
         {% endif %}
 
+        {% if request.user == item.created_by %}
+        <div class="p-6 bg-white rounded-xl">
+            <p>You own this item.</p>
+            <a href="#" class="inline-block text-lg px-4 py-2 bg-lime-500 text-white rounded-md hover:bg-lime-600">Edit Item</a>
+            <a href="{% url 'items:item_delete' item.id %}"
+                class="inline-block text-lg px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Delete Item</a>
+        </div>
+        {% else %}
         <a href="#" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Contact Seller</a>
+        {% endif %}
     </div>
 </div>
 

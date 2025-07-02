@@ -23,6 +23,7 @@ from django.urls import include, path
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("items/", include("items.urls", namespace="items")),
+    path("dashboard/", include("dashboard.urls", namespace="dashboard")),
     path("admin/", admin.site.urls),
 ] + static(
     # Serve media files during DEVELOPMENT
