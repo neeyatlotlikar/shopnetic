@@ -23,6 +23,8 @@
                     Add New Item</a>
                 <a href="{% url 'dashboard:index' %}"
                     class="px-6 py-3 text-lg font-semibold bg-orange-400 hover:bg-orange-600 text-white rounded-xl hover:text-white-400">Dashboard</a>
+                <a href="{% url 'discourse:inbox' %}"
+                    class="px-6 py-3 text-lg font-semibold bg-indigo-400 hover:bg-indigo-600 text-white rounded-xl hover:text-white-400">Inbox</a>
                 <a href="{% url 'core:logout' %}"
                     class="px-6 py-3 text-lg font-semibold bg-lime-400 hover:bg-lime-600 text-white rounded-xl hover:text-white-400">Logout</a>
                 {% else %}

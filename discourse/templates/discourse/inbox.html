@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+<h1 class="mb-6 text-3xl font-bold">Inbox</h1>
+
+<div class="space-y-6">
+    {% for discourse in discourses %}
+    <a href="{% url 'discourse:detail' discourse.id %}">
+        <div class="p-4 border border-gray-200 rounded-lg">
+            <div class="p-6 flex rounded-xl bg-gray-100">
+                <div class="pr-6">
+                    <img src="{{ discourse.item.image.url }}" alt="Item Image" class="rounded-xl w-20">
+                </div>
+                <div>
+                    {% for member in discourse.members.all %}
+                    {% if member != request.user %}
+                    <p class="mb-4"><strong>{{ member.username }} | {{ discourse.updated_at }}</strong></p>
+                    <p>{{ discourse.item.name }}</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock content %}

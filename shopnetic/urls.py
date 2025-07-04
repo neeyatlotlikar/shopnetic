@@ -24,6 +24,7 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("items/", include("items.urls", namespace="items")),
     path("dashboard/", include("dashboard.urls", namespace="dashboard")),
+    path("inbox/", include("discourse.urls", namespace="discourse")),
     path("admin/", admin.site.urls),
 ] + static(
     # Serve media files during DEVELOPMENT

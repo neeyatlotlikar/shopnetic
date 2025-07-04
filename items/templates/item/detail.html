@@ -25,7 +25,7 @@
                 class="inline-block text-lg px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Delete Item</a>
         </div>
         {% else %}
-        <a href="#" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Contact Seller</a>
+        <a href="{% url 'discourse:new' item.id %}" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Contact Seller</a>
         {% endif %}
     </div>
 </div>
